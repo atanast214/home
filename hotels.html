@@ -1,225 +1,425 @@
 <!DOCTYPE html>
-<html lang="bg">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Опции за хотели</title>
-  <style>
-    :root {
-      --bg: #f4f6fb;
-      --card: #ffffff;
-      --primary: #4f46e5;
-      --primary-soft: #eef2ff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --radius: 18px;
-    }
+<!-- saved from url=(0057)https://mobile_hotel_comparison_toggle_html.pagelet.host/ -->
+<html lang="bg"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Опции за хотели</title>
+    <style>
+        :root {
+            --bg: #f4f6fb;
+            --card: #ffffff;
+            --primary: #4f46e5;
+            --primary-soft: #eef2ff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --radius: 18px;
+        }
 
-    * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 120px);
-      color: var(--text);
-    }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 120px);
+            color: var(--text);
+        }
 
-    header {
-      position: sticky;
-      top: 0;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(8px);
-      padding: 14px 16px 16px;
-      z-index: 10;
-      border-bottom: 1px solid #e5e7eb;
-    }
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 14px 16px 16px;
+            z-index: 10;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 6px 16px rgba(204, 204, 204, 0.68);
 
-    header h1 {
-      font-size: 20px;
-      margin: 0 0 12px 0;
-      font-weight: 700;
-    }
+        }
 
-    nav {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 8px;
-    }
+        header h1 {
+            font-size: 20px;
+            margin: 0 0 12px 0;
+            font-weight: 700;
+        }
 
-    nav button {
-      padding: 12px 18px;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      background: var(--card);
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+        nav {
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            display: grid;
+            flex-wrap: wrap; /* allow wrapping to new row if too many buttons */
+            justify-content: center; /* optional, center the buttons */
+        }
 
-    nav button.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 6px 16px rgba(79,70,229,0.35);
-    }
+        nav button {
+            padding: 12px 18px;
+            border-radius: 999px;
+            border: 1px solid #e5e7eb;
+            background: var(--card);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1 2 150px; /* all buttons try to be 150px wide, but can shrink if needed */
+            width: 180px; /* optional, prevent buttons from growing too big */
+            height: 60px; /* optional, prevent buttons from growing too big */
+            text-align: center;
+            box-shadow: 0 6px 16px rgba(228, 228, 228, 0.82);
 
-    section {
-      display: none;
-      padding: 16px;
-    }
+        }
 
-    section.active {
-      display: block;
-      animation: fadeIn 0.25s ease;
-    }
+        nav button.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+            font-weight: 700;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        section {
+            display: none;
+            padding: 16px;
+        }
 
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 16px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    }
+        section.active {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
 
-    .hotel-name {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .section-title {
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      margin: 16px 0 8px;
-    }
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
 
-    .price {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
+        .hotel-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
 
-    .price div {
-      background: #f0fdf4;
-      border: 1px solid #dcfce7;
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--success);
-      text-align: center;
-    }
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            margin: 16px 0 8px;
+        }
 
-    .price span {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--muted);
-    }
+        .price {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
 
-    .pros-cons {
-      margin-top: 16px;
-    }
+        .price div {
+            background: #f0fdf4;
+            border: 1px solid #dcfce7;
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--success);
+            text-align: center;
+        }
 
-    .pros-cons ul {
-      padding-left: 18px;
-      margin: 0;
-      list-style-type: none;
-    }
+        .price span {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--muted);
+        }
 
-    .pros-cons li[data-symbol="+"] {
-      color: var(--success);
-      font-weight: 600;
-    }
+        .pros-cons {
+            margin-top: 16px;
+        }
 
-    .pros-cons li[data-symbol="-"] {
-      color: var(--danger);
-      font-weight: 600;
-    }
+        .pros-cons ul {
+            padding-left: 18px;
+            margin: 0;
+            list-style-type: none;
+        }
 
-    footer {
-      text-align: center;
-      font-size: 13px;
-      padding: 24px 12px 32px;
-      color: var(--muted);
-    }
-  </style>
+        .pros-cons li[data-symbol="+"] {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .pros-cons li[data-symbol="-"] {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .pros-cons li[data-symbol="+"]::before {
+            content: '+ ';
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .pros-cons li[data-symbol="-"]::before {
+            content: '- ';
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 13px;
+            padding: 10px 10px 10px;
+            color: var(--muted);
+        }
+    </style>
 </head>
 <body>
 
 <header>
-  <h1>🏖️ Опции за хотели</h1>
-  <nav id="hotelNav">
-    <button class="active" onclick="showHotel(0)">Alkyonis Hotel</button>
-    <button onclick="showHotel(1)">Secret Paradise</button>
-    <button onclick="showHotel(2)">Renaissance Resort</button>
-    <button onclick="showHotel(3)">Porfi</button>
-    <button onclick="showHotel(4)">Elektra Hotel</button>
-  </nav>
+    <h1>🏖️ Опции за хотели</h1>
+    <nav id="hotelNav">
+        <button class="active" onclick="showHotel(0)">Alkyonis Hotel</button>
+        <button onclick="showHotel(1)">Secret Paradise</button>
+        <button onclick="showHotel(2)">Renaissance Resort</button>
+        <button onclick="showHotel(3)">Porfi Beach Hotel</button>
+        <button onclick="showHotel(4)">Elektra Hotel</button>
+    </nav>
 </header>
 
+<!-- Alkyonis Hotel -->
 <section class="active">
-  <div class="card">
-    <div class="section-title">Име на хотел</div>
-    <div class="hotel-name">Alkyonis Hotel 3* (Неа Каликратия)</div>
-
-    <div class="section-title">Цени за стаи</div>
-    <div class="price">
-      <div>280 лв / нощувка <span>Двойна стая</span></div>
-      <div>320 лв / нощувка <span>Тройна стая</span></div>
+    <div class="card">
+        <div class="section-title">Име на хотел</div>
+        <div class="hotel-name">Alkyonis Hotel 3* (Неа Каликратия)</div>
+        <div class="section-title">Цени за стаи (безплатно анулиране)</div>
+        <div class="price">
+            <div>280 лв / нощувка <span>Двойна стая</span></div>
+            <div>320 лв / нощувка <span>Тройна стая</span></div>
+        </div>
+        <div class="section-title">Забележки</div>
+        <div class="pros-cons">
+            <ul>
+                <li data-symbol="+">добра цена</li>
+                <li data-symbol="+">закуска</li>
+                <li data-symbol="+">много добри ревюта</li>
+                <li data-symbol="+">хубав пясъчен плаж</li>
+                <li data-symbol="+">добра локация</li>
+                <li data-symbol="+">стаи с изглед към морето</li>
+                <li data-symbol="+">басейн</li>
+                <li data-symbol="-">втора линия (150м от плажната ивица)</li>
+                <li data-symbol="-">малък хотел</li>
+            </ul>
+        </div>
+        <div class="section-title">Галерия</div>
+        <div class="gallery">
+            <img src="./hotels_files/Screenshot-2026-01-20-204504.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/alkyonis-hotel-halkidiki-entrance.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/L1687097.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/alkyonis-hotel-halkidiki-lobby.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/L1687141.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/alkyonis-hotel-halkidiki-openpool.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/alkyonis-hotel-halkidiki-breakfast-27.jpg" alt="Hotel image 1">
+        </div>
     </div>
-
-    <div class="section-title">Забележки</div>
-    <div class="pros-cons">
-      <ul>
-        <li data-symbol="+">цена</li>
-        <li data-symbol="+">добри ревюта</li>
-        <li data-symbol="+">хубави пясъчни плажове</li>
-        <li data-symbol="+">близко разстояние до плажа и центъра</li>
-        <li data-symbol="+">стай с изглед към морето</li>
-        <li data-symbol="+">басейн</li>
-        <li data-symbol="-">обикновен хотел</li>
-        <li data-symbol="-">втора линия</li>
-        <li data-symbol="-">няма лоби или подобно място за сядане</li>
-      </ul>
-    </div>
-  </div>
 </section>
 
-<!-- Repeat sections for the other hotels, same structure -->
+<!-- Secret Paradise -->
+<section>
+    <div class="card">
+        <div class="section-title">Име на хотел</div>
+        <div class="hotel-name">Secret Paradise 4* (Неа Каликратия)</div>
+        <div class="section-title">Цени за стаи (безплатно анулиране)</div>
+        <div class="price">
+            <div>340 лв / нощувка <span>Двойна стая</span></div>
+            <div>460 лв / нощувка <span>Тройна стая</span></div>
+        </div>
+        <div class="section-title">Цени за стаи (плащане сега)</div>
+        <div class="price">
+            <div>310 лв / нощувка <span>Двойна стая</span></div>
+            <div>410 лв / нощувка <span>Тройна стая</span></div>
+        </div>
+        <div class="section-title">Забележки</div>
+        <div class="pros-cons">
+            <ul>
+                <li data-symbol="+">отлични ревюта</li>
+                <li data-symbol="+">закуска</li>
+                <li data-symbol="+">луксозен тип хотел</li>
+                <li data-symbol="+">първа линия</li>
+                <li data-symbol="+">на 100 метра от плажната ивица</li>
+                <li data-symbol="+">близко разстояние до центъра</li>
+                <li data-symbol="+">хубави пясъчни плажове</li>
+                <li data-symbol="+">басейни (вътрешен и външен)</li>
+                <li data-symbol="+">СПА център</li>
+                <li data-symbol="+">паркинг</li>
+                <li data-symbol="-">стаите са минимален изглед към морето</li>
+                <li data-symbol="-">по-висока цена</li>
+            </ul>
+        </div>
+        <div class="section-title">Галерия</div>
+        <div class="gallery">
+            <img src="./hotels_files/Screenshot-2026-01-20-204413.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/secret-paradise-hotel-spa-halkidiki-141.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/secret-paradise-the-hotel3.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/secret-paradise-16.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/secret-paradise-85.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/secret-paradise-hotel-spa-halkidiki-restaurant-buffet-152.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/L1410564.jpg" alt="Hotel image 1">
+        </div>
+    </div>
+</section>
+
+<!-- Renaissance Resort -->
+<section>
+    <div class="card">
+        <div class="section-title">Име на хотел</div>
+        <div class="hotel-name">Renaissance Resort 3* (Ханиоти)</div>
+        <div class="section-title">Цени за стаи (безплатно анулиране)</div>
+        <div class="price">
+            <div>325 лв / нощувка <span>Апартамент (макс. 3 човека)</span></div>
+        </div>
+        <div class="section-title">Забележки</div>
+        <div class="pros-cons">
+            <ul>
+                <li data-symbol="+">добра цена</li>
+                <li data-symbol="+">закуска</li>
+                <li data-symbol="+">добра локация</li>
+                <li data-symbol="+">басейн</li>
+                <li data-symbol="+">просторни апартаменти</li>
+                <li data-symbol="-">няма гледка към морето</li>
+                <li data-symbol="-">втора линия (150 метра до плажа)</li>
+                <li data-symbol="-">няма паркинг</li>
+                <li data-symbol="-">плажната ивица е малка и тясна</li>
+                <li data-symbol="-">плитки, дълбоки и леко каменисти плажове</li>
+            </ul>
+        </div>
+        <div class="section-title">Галерия</div>
+        <div class="gallery">
+            <img src="./hotels_files/Screenshot-2026-01-20-205409.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/ren11-0098.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/1-2.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/L290874.jpg" alt="Hotel image 1">
+        </div>
+    </div>
+</section>
+
+<!-- Porfi -->
+<section>
+    <div class="card">
+        <div class="section-title">Име на хотел</div>
+        <div class="hotel-name">Porfi Beach Hotel 3* (Никити)</div>
+        <div class="section-title">Цени за стаи (плащане сега)</div>
+        <div class="price">
+            <div>360 лв / нощувка <span>Двойна стая</span></div>
+            <div>420 лв / нощувка <span>Тройна стая</span></div>
+        </div>
+        <div class="section-title">Забележки</div>
+        <div class="pros-cons">
+            <ul>
+                <li data-symbol="+">частен плаж</li>
+                <li data-symbol="+">закуска</li>
+                <li data-symbol="+">първа линия (пред плажа)</li>
+                <li data-symbol="+">хубав и пясъчен плаж</li>
+                <li data-symbol="+">тишина и спокойствие</li>
+                <li data-symbol="-">стaите са без гледка към морето</li>
+                <li data-symbol="-">по-висока цена</li>
+                <li data-symbol="-">извън града (на 3 км)</li>
+            </ul>
+        </div>
+        <div class="section-title">Галерия</div>
+        <div class="gallery">
+            <img src="./hotels_files/Screenshot-2026-01-20-213654.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/Porfi_Beach.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/Porfi_Beach_1-1.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/Porfi_Beach_3.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/Porfi_Beach_8.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/Porfi_Beach_26.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/Porfi_superior_dbl_02.jpg" alt="Hotel image 1">
+        </div>
+    </div>
+</section>
+
+<!-- Elektra Hotel -->
+<section>
+    <div class="card">
+        <div class="section-title">Име на хотел</div>
+        <div class="hotel-name">Elektra Hotel 3* (Тасос)</div>
+        <div class="section-title">Цени за стаи (плащане сега)</div>
+        <div class="price">
+            <div>330 лв / нощувка <span>Двойна стая</span></div>
+            <div>465 лв / нощувка <span>Тройна стая</span></div>
+        </div>
+        <div class="section-title">Забележки</div>
+        <div class="pros-cons">
+            <ul>
+                <li data-symbol="+">частен плаж</li>
+                <li data-symbol="+">закуска</li>
+                <li data-symbol="+">първа линия (пред плажа)</li>
+                <li data-symbol="+">хубав и пясъчен плаж</li>
+                <li data-symbol="+">близко разстояние до центъра и ферибота</li>
+                <li data-symbol="+">положителни ревюта от гостите</li>
+                <li data-symbol="-">по-висока цена</li>
+                <li data-symbol="-">плаж до фериботи</li>
+            </ul>
+        </div>
+        <div class="section-title">Галерия</div>
+        <div class="gallery">
+            <img src="./hotels_files/Screenshot-2026-01-20-213742.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/790949260.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/790949262.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/790951439.jpg" alt="Hotel image 1">
+            <img src="./hotels_files/370430949.jpg" alt="Hotel image 1">
+        </div>
+    </div>
+</section>
 
 <footer>
-  Докоснете хотел горе, за да сравните и изберете 👆
+    Докоснете хотел горе, за да сравните и изберете 👆
 </footer>
 
 <script>
-  function showHotel(index) {
-    const sections = document.querySelectorAll('section');
-    const buttons = document.querySelectorAll('#hotelNav button');
-
-    sections.forEach((s, i) => {
-      s.classList.toggle('active', i === index);
-    });
-
-    buttons.forEach((b, i) => {
-      b.classList.toggle('active', i === index);
-    });
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+    function showHotel(index) {
+        const sections = document.querySelectorAll('section');
+        const buttons = document.querySelectorAll('#hotelNav button');
+        sections.forEach((s, i) => {
+            s.classList.toggle('active', i === index);
+        });
+        buttons.forEach((b, i) => {
+            b.classList.toggle('active', i === index);
+        });
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
 </script>
 
-</body>
-</html>
+
+
+</body></html>
