@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Опции за хотели</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --card: #ffffff;
+      --primary: #4f46e5;
+      --primary-soft: #eef2ff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 120px);
+      color: var(--text);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      padding: 14px 16px 16px;
+      z-index: 10;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    header h1 {
+      font-size: 20px;
+      margin: 0 0 12px 0;
+      font-weight: 700;
+    }
+
+    nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 8px;
+    }
+
+    nav button {
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: var(--card);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    nav button.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 6px 16px rgba(79,70,229,0.35);
+    }
+
+    section {
+      display: none;
+      padding: 16px;
+    }
+
+    section.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .hotel-name {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin: 16px 0 8px;
+    }
+
+    .price {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .price div {
+      background: #f0fdf4;
+      border: 1px solid #dcfce7;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--success);
+      text-align: center;
+    }
+
+    .price span {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .pros-cons {
+      margin-top: 16px;
+    }
+
+    .pros-cons ul {
+      padding-left: 18px;
+      margin: 0;
+      list-style-type: none;
+    }
+
+    .pros-cons li[data-symbol="+"] {
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .pros-cons li[data-symbol="-"] {
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      padding: 24px 12px 32px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🏖️ Опции за хотели</h1>
+  <nav id="hotelNav">
+    <button class="active" onclick="showHotel(0)">Alkyonis Hotel</button>
+    <button onclick="showHotel(1)">Secret Paradise</button>
+    <button onclick="showHotel(2)">Renaissance Resort</button>
+    <button onclick="showHotel(3)">Porfi</button>
+    <button onclick="showHotel(4)">Elektra Hotel</button>
+  </nav>
+</header>
+
+<section class="active">
+  <div class="card">
+    <div class="section-title">Име на хотел</div>
+    <div class="hotel-name">Alkyonis Hotel 3* (Неа Каликратия)</div>
+
+    <div class="section-title">Цени за стаи</div>
+    <div class="price">
+      <div>280 лв / нощувка <span>Двойна стая</span></div>
+      <div>320 лв / нощувка <span>Тройна стая</span></div>
+    </div>
+
+    <div class="section-title">Забележки</div>
+    <div class="pros-cons">
+      <ul>
+        <li data-symbol="+">цена</li>
+        <li data-symbol="+">добри ревюта</li>
+        <li data-symbol="+">хубави пясъчни плажове</li>
+        <li data-symbol="+">близко разстояние до плажа и центъра</li>
+        <li data-symbol="+">стай с изглед към морето</li>
+        <li data-symbol="+">басейн</li>
+        <li data-symbol="-">обикновен хотел</li>
+        <li data-symbol="-">втора линия</li>
+        <li data-symbol="-">няма лоби или подобно място за сядане</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Repeat sections for the other hotels, same structure -->
+
+<footer>
+  Докоснете хотел горе, за да сравните и изберете 👆
+</footer>
+
+<script>
+  function showHotel(index) {
+    const sections = document.querySelectorAll('section');
+    const buttons = document.querySelectorAll('#hotelNav button');
+
+    sections.forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+    });
+
+    buttons.forEach((b, i) => {
+      b.classList.toggle('active', i === index);
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
